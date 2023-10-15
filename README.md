@@ -2,12 +2,12 @@
 
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Spring](https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white)
-![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)
-![JWT](https://img.shields.io/badge/JWT-black?style=for-the-badge&logo=JSON%20web%20tokens)
+[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
 
 This project is an API built using **Java, Java Spring, H2 as the database.** 
 
 The API was developed for my [Youtube Tutorial](https://www.youtube.com/watch?v=QXunBiLq2SM), to demonstrate how  to solve the [PicPay Backend Challenge](https://github.com/PicPay/picpay-desafio-backend) using Java Spring.
+
 The Unit tests was developed during another [Youtube Tutorial](https://youtu.be/T6ChO8LQxRE), with the aim to demonstrate how to write unit tests for Java Spring apps using JUnit, Mockito and AssertJ.
 
 ## Table of Contents
@@ -38,10 +38,11 @@ git clone https://github.com/Fernanda-Kipper/auth-api.git
 ## API Endpoints
 The API provides the following endpoints:
 
+**GET USERS**
+```markdown
+GET /users - Retrieve a list of all users.
+```
 ```json
-GET /users - Retrieve a list of all users. 
-
-RESPONSE EXAMPLE:
 [
     {
         "id": 1,
@@ -66,22 +67,11 @@ RESPONSE EXAMPLE:
 ]
 ```
 
-```json
-POST /transactions - Register a new Transaction between users (COMMON to COMMON or COMMON to MERCHANT)
-
-REQUEST EXAMPLE:
-
-{
-  "senderId": 4,
-  "receiverId": 1,
-  "value": 10
-}
-```
-
-```json
+**POST USERS**
+```markdown
 POST /users - Register a new user into the App
-
-REQUEST EXAMPLE:
+```
+```json
 {
     "firstName": "Lucas",
     "lastName": "Silva",
@@ -90,6 +80,20 @@ REQUEST EXAMPLE:
     "email": "lucas@example.com",
     "userType": "COMMON",
     "balance": 10
+}
+```
+
+**POST TRANSACTIONS**
+```markdown
+POST /transactions - Register a new Transaction between users (COMMON to COMMON or COMMON to MERCHANT)
+```
+
+```json
+
+{
+  "senderId": 4,
+  "receiverId": 1,
+  "value": 10
 }
 ```
 
