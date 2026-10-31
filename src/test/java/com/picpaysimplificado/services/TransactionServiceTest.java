@@ -48,10 +48,7 @@ class TransactionServiceTest {
         User sender = new User(1L, "Maria", "Souza", "99999999901", "maria@gmail.com", "12345", new BigDecimal(10), UserType.COMMON);
         User receiver = new User(2L, "Joao", "Souza", "99999999902", "joao@gmail.com", "12345", new BigDecimal(10), UserType.COMMON);
 
-        when(userService.findUserById(1L)).thenReturn(sender);
-        when(userService.findUserById(2L)).thenReturn(receiver);
-
-        when(authService.authorizeTransaction(any(), any())).thenReturn(true);
+        setupAuthorizationServiceAuthorizeTransactionAndFindUserByIdStubs(sender, receiver, true);
 
         TransactionDTO request = new TransactionDTO(new BigDecimal(10), 1L, 2L);
         transactionService.createTransaction(request);
@@ -74,10 +71,7 @@ class TransactionServiceTest {
         User sender = new User(1L, "Maria", "Souza", "99999999901", "maria@gmail.com", "12345", new BigDecimal(10), UserType.COMMON);
         User receiver = new User(2L, "Joao", "Souza", "99999999902", "joao@gmail.com", "12345", new BigDecimal(10), UserType.COMMON);
 
-        when(userService.findUserById(1L)).thenReturn(sender);
-        when(userService.findUserById(2L)).thenReturn(receiver);
-
-        when(authService.authorizeTransaction(any(), any())).thenReturn(false);
+        setupAuthorizationServiceAuthorizeTransactionAndFindUserByIdStubs(sender, receiver, false);
 
         Exception thrown = Assertions.assertThrows(Exception.class, () -> {
             TransactionDTO request = new TransactionDTO(new BigDecimal(10), 1L, 2L);
@@ -85,5 +79,11 @@ class TransactionServiceTest {
         });
 
         Assertions.assertEquals("Transação não autorizada", thrown.getMessage());
+    }
+
+    private void setupAuthorizationServiceAuthorizeTransactionAndFindUserByIdStubs(User sender, User receiver, boolean authorizeTransactionReturnValue) throws Exception {
+        when(userService.findUserById(1L)).thenReturn(sender);
+        when(userService.findUserById(2L)).thenReturn(receiver);
+        when(authService.authorizeTransaction(any(), any())).thenReturn(authorizeTransactionReturnValue);
     }
 }
